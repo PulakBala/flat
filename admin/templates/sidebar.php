@@ -4,7 +4,7 @@
 
 <style>
     .sidebar {
-        width: 20%; /* Wider sidebar */
+        width: 18%; /* Wider sidebar */
         height: 100vh;
         position: fixed;
         top: 0;
@@ -13,6 +13,7 @@
         box-shadow: 3px 0 10px rgba(0, 0, 0, 0.2); /* Sidebar shadow */
         overflow: hidden;
         padding-top: 20px;
+        /* border: 1px solid palegreen; */
     }
 
     .sidebar h1 {
@@ -41,24 +42,7 @@
         font-size: 1.3rem; /* Adjust icon size */
     }
 </style>
-<!-- <div class="dashboard d-flex " style="gap: 50px;">
-<div class="sidebar bg-dark vh-100 p-3">
-    <h1 class="mb-3">
-        <a href="#" class="sidebar-link text-light text-decoration-none">Dashboard</a>
-    </h1>
-    <h1 class="mb-3">
-        <a href="/create.php" class="sidebar-link text-light text-decoration-none">ADD NEW FLAT</a>
-    </h1>
-    <h1 class="mb-3">
-        <a href="/allflatdata.php" class="sidebar-link text-light text-decoration-none">ALL FLAT</a>
-    </h1>
-    <h1 class="mb-3">
-        <a href="./index.php" class="sidebar-link text-light text-decoration-none">FLAT DETAILS</a>
-    </h1>
-    <h1 class="mb-3">
-        <a href="./index.php" class="sidebar-link text-light text-decoration-none">ACCOUNTS</a>
-    </h1>
-</div> -->
+
 
 <div class="sidebar bg-dark vh-100 p-3">
     <h1 class="mb-4">

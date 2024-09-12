@@ -3,10 +3,16 @@ include('./templates/sidebar.php');
 ?>
 
 <style>
+  .container{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: end;
+  }
   .card-container {
+    width: 80%;
     display: grid;
-    gap: 20px;
-    margin-right: -80px;
+    gap: 15px;
+    /* margin-right: -100px; */
     padding: 0;
   }
 
@@ -14,12 +20,16 @@ include('./templates/sidebar.php');
     padding: 20px;
     transition: all 0.3s ease-in-out;
   }
+  .card-link{
+      text-decoration: none;
+    }
 
   /* Custom grid for larger desktops */
   @media (min-width: 1280px) {
     .card-container {
+      width: 80%;
       grid-template-columns: repeat(4, 1fr);
-      margin-left: 200px;
+      /* margin-left: 200px; */
       /* 4 cards per row */
     }
   }
@@ -27,6 +37,7 @@ include('./templates/sidebar.php');
   /* Custom grid for laptops and small desktops (769px - 1279px) */
   @media (min-width: 769px) and (max-width: 1279px) {
     .card-container {
+      width: 70%;
       grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
       
     }
@@ -49,6 +60,7 @@ include('./templates/sidebar.php');
       font-size: 0.9rem; /* Reduce font size slightly */
       padding: 10px;
     }
+   
   }
 </style>
 
@@ -60,6 +72,7 @@ include('./templates/sidebar.php');
     $result = mysqli_query($conn, $sqlSelect);
     while ($data = mysqli_fetch_array($result)) {
     ?>
+      <a href="flat-details.php" class="card-link">
       <div class="card">
         <div class="card-body p-4 shadow-lg rounded" style="background-color: #f8f9fa;">
           <h5 class="card-title">
@@ -77,6 +90,7 @@ include('./templates/sidebar.php');
           </p>
         </div>
       </div>
+      </a>
     <?php
     }
     ?>

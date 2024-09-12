@@ -5,7 +5,9 @@ include('templates/header.php')
 <style>
   .create-form {
 
-
+    display: flex;
+    justify-content: center;
+    margin-left: 600px;
   }
 
   .form {
