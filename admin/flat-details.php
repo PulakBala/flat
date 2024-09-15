@@ -1,6 +1,4 @@
-<?php 
-  // include('templates/sidebar.php')
-?>
+
 
 
     <style>
@@ -75,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php include('templates/sidebar.php') ?>
   </div>
   <div class="container mt-4" style="width: 80%;">
-  <form action="" method="post">
+  <form action="invoice.php" method="post">
         <div class="form-section">
             <h5>1. Monthly Services Charge</h5>
             <div class="form-row">
