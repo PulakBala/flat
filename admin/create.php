@@ -7,7 +7,7 @@ include('templates/header.php')
 
     display: flex;
     justify-content: center;
-    margin-left: 600px;
+   
   }
 
   .form {
