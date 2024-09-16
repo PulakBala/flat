@@ -49,6 +49,21 @@ $donation = 0;
 $developmentVarious = 0;
 $totalAmount = 0;
 
+
+// defalult months value 
+$months = [
+    'month1' => '',
+    'month2' => '',
+    'month3' => '',
+    'month4' => '',
+    'month5' => '',
+    'month6' => '',
+    'month7' => '',
+    'month8' => '',
+    'month9' => '',
+    'month10' => ''
+];
+
 // If form is submitted, process the input
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $serviceCharge = isset($_POST['serviceCharge']) ? floatval($_POST['serviceCharge']) : 0;
@@ -61,9 +76,143 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $atticRent = isset($_POST['atticRent']) ? floatval($_POST['atticRent']) : 0;
     $donation = isset($_POST['donation']) ? floatval($_POST['donation']) : 0;
     $developmentVarious = isset($_POST['developmentVarious']) ? floatval($_POST['developmentVarious']) : 0;
+    
+
+     // Fetch month values
+     foreach ($months as $key => &$value) {
+        $value = isset($_POST[$key]) ? htmlspecialchars($_POST[$key]) : '';
+    }
+    unset($value); // break reference
+    
 
     // Calculate total amount
     $totalAmount = $serviceCharge + $internetBill + $dishBill + $flatRent + $commonBill + $centerRent + $centerVarious + $atticRent + $donation + $developmentVarious;
+
+    //handle action basec on submit button clicked 
+    if(isset($_POST['submitAction'])){
+        switch($_POST['submitAction']){
+            case 'calculate':
+                break;
+            case 'invoice':
+                // Generate invoice HTML
+                echo "
+                <!DOCTYPE html>
+                <html lang='en'>
+                <head>
+                    <meta charset='UTF-8'>
+                    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                    <title>Invoice</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 20px; }
+                        .invoice-container { display: flex; justify-content: space-between; gap:20px; }
+                        .invoice { border: 1px solid #ddd; padding: 20px; border-radius: 8px; width: 48%; }
+                        .invoice-header { text-align: center; margin-bottom: 20px; }
+                        .invoice-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+                        .invoice-table th, .invoice-table td { padding: 10px; border: 1px solid #ddd; }
+                        .invoice-table th { background-color: #f4f4f4; }
+                        .invoice-total { font-weight: bold; }
+                        .invoice-footer { text-align: center; margin-top: 20px; font-size: 0.875em; color: #666; }
+                    </style>
+                </head>
+                <body>
+                    <div class='invoice-container'>
+                        <!-- Office Copy -->
+                        <div class='invoice'>
+                            <div class='invoice-header'>
+                                <h2>Invoice</h2>
+                                <p>Month: " . htmlspecialchars(ucfirst($_POST['month1'])) . "</p>
+                                <h3>Office Copy</h3>
+                            </div>
+                            <table class='invoice-table'>
+                                <thead>
+                                    <tr><th>Month</th>
+                                        <th>Description</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>";
+
+                                $charges = [
+                                    ['month' => $months['month1'], 'description' => 'Service Charge', 'amount' => $serviceCharge],
+                                    ['month' => $months['month2'], 'description' => 'Internet Bill', 'amount' => $internetBill],
+                                    ['month' => $months['month3'], 'description' => 'Dish Bill', 'amount' => $dishBill],
+                                    ['month' => $months['month4'], 'description' => 'Flat Rent', 'amount' => $flatRent],
+                                    ['month' => $months['month5'], 'description' => 'Common Bill', 'amount' => $commonBill],
+                                    ['month' => $months['month6'], 'description' => 'Center Rent', 'amount' => $centerRent],
+                                    ['month' => $months['month10'], 'description' => 'Center Various', 'amount' => $centerVarious], // Added Center Various
+                                    ['month' => $months['month7'], 'description' => 'Attic Rent', 'amount' => $atticRent],
+                                    ['month' => $months['month8'], 'description' => 'Donation', 'amount' => $donation],
+                                    ['month' => $months['month9'], 'description' => 'Development Various', 'amount' => $developmentVarious],
+                                ];
+                                
+                                foreach ($charges as $charge) {
+                                    if ($charge['amount'] > 0) {
+                                        echo "<tr>
+                                                 <td>{$charge['month']}</td>
+                                                <td>{$charge['description']}</td>
+                                                <td>$" . number_format($charge['amount'], 2) . "</td>
+                                              </tr>";
+                                    }
+                                }
+
+                echo "</tbody>
+                    </table>
+                    <div class='invoice-total'>
+                        <p>Total Amount: $" . number_format($totalAmount, 2) . "</p>
+                    </div>
+                    <div class='invoice-footer'>
+                        <p>Thank you for your business!</p>
+                    </div>
+                </div>
+                
+              
+
+                 <!-- Customer Copy -->
+                <div class='invoice'>
+                    <div class='invoice-header'>
+                        <h2>Invoice</h2>
+                        <p>Month: " . htmlspecialchars(ucfirst($_POST['month1'])) . "</p>
+                        <h3>Customer Copy</h3>
+                    </div>
+                    <table class='invoice-table'>
+                        <thead>
+                            <tr>
+                                <th>month</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>";
+
+                        foreach ($charges as $charge) {
+                            if ($charge['amount'] > 0) {
+                                echo "<tr>
+                                          <td>{$charge['month']}</td>
+                                        <td>{$charge['description']}</td>
+                                        <td>$" . number_format($charge['amount'], 2) . "</td>
+                                      </tr>";
+                            }
+                        }
+
+                echo "</tbody>
+                    </table>
+                    <div class='invoice-total'>
+                        <p>Total Amount: $" . number_format($totalAmount, 2) . "</p>
+                    </div>
+                    <div class='invoice-footer'>
+                        <p>Thank you for your business!</p>
+                    </div>
+                </div>
+            </div>
+               
+        
+                </body>
+                </html>";
+                exit;
+            case 'sms':
+                break;        
+        }
+    }
 }
 ?>
 
@@ -73,15 +222,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <?php include('templates/sidebar.php') ?>
   </div>
   <div class="container mt-4" style="width: 80%;">
-  <form action="invoice.php" method="post">
+  <form action="" method="post">
         <div class="form-section">
             <h5>1. Monthly Services Charge</h5>
             <div class="form-row">
                 <label for="month1">Select Month</label>
-                <select id="month1" class="form-control">
-                    <option value="january">January</option>
-                    <option value="february">February</option>
-                    <option value="march">March</option>
+                <select id="month1" name="month1" class="form-control">
+                    <option value="january" <?php echo $months['month1'] === 'january' ? 'selected' : ''; ?>>January</option>
+                    <option value="february" <?php echo $months['month1'] === 'february' ? 'selected' : ''; ?>>February</option>
+                    <option value="march" <?php echo $months['month1'] === 'march' ? 'selected' : ''; ?>>March</option>
                 </select>
             </div>
             <div class="form-row">
@@ -93,7 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h5>2. Internet Bill</h5>
             <div class="form-row">
                 <label for="month2">Select Month</label>
-                <select id="month2" class="form-control">
+                <select id="month2" name="month2" class="form-control">
                     <option value="january">January</option>
                     <option value="february">February</option>
                     <option value="march">March</option>
@@ -111,7 +260,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h5>3. Dish Bill</h5>
             <div class="form-row">
                 <label for="month3">Select Month</label>
-                <select id="month3" class="form-control">
+                <select id="month3" name="month3" class="form-control">
                     <option value="january">January</option>
                     <option value="february">February</option>
                     <option value="march">March</option>
@@ -128,7 +277,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h5>4. Association Flat Rent</h5>
             <div class="form-row">
                 <label for="month4">Select Month</label>
-                <select id="month4" class="form-control">
+                <select id="month4" name="month4" class="form-control">
                     <option value="january">January</option>
                     <option value="february">February</option>
                     <option value="march">March</option>
@@ -143,7 +292,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h5>5. Common Current Bill</h5>
             <div class="form-row">
                 <label for="month5">Select Month</label>
-                <select id="month5" class="form-control">
+                <select id="month5" name="month5" class="form-control">
                     <option value="january">January</option>
                     <option value="february">February</option>
                     <option value="march">March</option>
@@ -169,7 +318,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <h5>7. Attic Rent</h5>
             <div class="form-row">
                 <label for="month7">Select Month</label>
-                <select id="month7" class="form-control">
+                <select id="month7"  name="month7" class="form-control">
                     <option value="january">January</option>
                     <option value="february">February</option>
                     <option value="march">March</option>
@@ -196,10 +345,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="form-section">
             <h5>Total Amount: $<?php echo number_format($totalAmount, 2); ?></h5>
         </div>
-
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Submit</button>
+        <input type="hidden" name="action" value="calculate">
+    <div style="display: flex; gap:10px">
+        
+    <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="submitAction" value="calculate">Submit</button>
         </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="submitAction" value="invoice">Generate Invoice</button>
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" name="submitAction" value="sms">Send SMS</button>
+        </div>
+    </div>
     </form>
 </div>
 </div>
