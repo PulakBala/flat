@@ -61,7 +61,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="icon fas fa-credit-card"></i>
-                        <h5 class="card-title">Expense</h5>
+                        <h5 class="card-title">Total Expense</h5>
                     </div>
                     <div class="card-body">
                         <p class="card-text">$987.65</p>

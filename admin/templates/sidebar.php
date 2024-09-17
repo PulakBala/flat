@@ -136,22 +136,22 @@
             <div class="dropdown-content">
                 <a href="../admin/accounts.php"><i class="bi bi-people-fill me-2"></i> ACCOUNTS</a>
                 <a href="../admin/reserved-cash.php"><i class="bi bi-people-fill me-2"></i> COLLECTION</a>
-                <a href="../admin/account-settings.php"><i class="bi bi-people-fill me-2"></i> ADD EXPANSE</a>
+                <a href="../admin/add-expense.php"><i class="bi bi-people-fill me-2"></i> ADD EXPANSE</a>
             </div>
         </div>
         
         <!-- Reserved Section with Dropdown -->
-        <div class="dropdown" id="reservedDropdown">
+        <!-- <div class="dropdown" id="reservedDropdown">
             <button class="dropdown-button" onclick="toggleDropdown('reservedDropdown')">
                 <i class="bi bi-people-fill me-2"></i> RESERVED
                 <span class="dropdown-icon">&#9662;</span>
             </button>
             <div class="dropdown-content">
-                <a href="../admin/accounts.php"><i class="bi bi-people-fill me-2"></i> CASH IN</a>
+                <a href="../admin/cash-in.php"><i class="bi bi-people-fill me-2"></i> CASH IN</a>
                 <a href="../admin/reserved-cash.php"><i class="bi bi-people-fill me-2"></i> CASH OUT</a>
                 <a href="../admin/account-settings.php"><i class="bi bi-people-fill me-2"></i> CASH REPORT</a>
             </div>
-        </div>
+        </div> -->
 
         
 </div>

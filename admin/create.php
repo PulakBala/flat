@@ -3,6 +3,10 @@
     width: 80%;
     justify-content: center;
   }
+  .contact-form-wrapper{
+    min-width: 700px;
+    height: 600px;
+  }
   .addnewflat{
     display: flex;
 
@@ -81,8 +85,8 @@
           }
           ?>
 
-          <div class="contact-form-wrapper d-flex justify-content-center mx-auto align-items-center vh-100">
-            <form class="form p-5 shadow-lg rounded" action="proces.php" method="POST">
+          <div class="contact-form-wrapper d-flex justify-content-center mx-auto align-items-center ">
+            <form class="form p-5 shadow-lg rounded" action="proces.php" method="POST" style="width: 400px; height:500px">
               <h2 class="text-center mb-4 text-uppercase" style="letter-spacing: 2px; color: #3498db;">ADD NEW FLAT</h2>
               <div class="mb-3">
                 <input type="text" name="owner" class="form-control" placeholder="Owner Name" required>

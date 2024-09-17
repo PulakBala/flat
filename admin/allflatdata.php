@@ -29,7 +29,7 @@
   @media (min-width: 1280px) {
     .card-container {
       width: 80%;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       /* margin-left: 200px; */
       /* 4 cards per row */
     }
@@ -81,9 +81,21 @@
       include('connection.php');
       $sqlSelect = "SELECT * FROM flats";
       $result = mysqli_query($conn, $sqlSelect);
+
+      $flat = mysqli_fetch_assoc($result);
+      if ($flat) {
+        $ownerName = htmlspecialchars($flat['owner_name']);
+        $mobileNumber = htmlspecialchars($flat['mobile_number']);
+    } else {
+        // Handle the case where the flat is not found
+        $ownerName = 'Not Found';
+        $mobileNumber = 'Not Found';
+    }
+
+
       while ($data = mysqli_fetch_array($result)) {
       ?>
-        <a href="flat-details.php" class="card-link">
+        <a href="flat-details.php?id=<?php echo $data["id"]; ?>"  class="card-link">
           <div class="card">
             <div class="card-body p-4 shadow-lg rounded" style="background-color: #f8f9fa;">
               <h5 class="card-title">
