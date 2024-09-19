@@ -65,6 +65,7 @@
     }
   }
 </style>
+
 <div class="addnewflat">
   <div>
     <?php
@@ -79,7 +80,7 @@
         <div class="content">
 
           <?php
-          // success মেসেজ চেক করা
+          // success 
           if (isset($_GET['status']) && $_GET['status'] == 'success') {
             echo "<div id='success-messsage' class='alert alert-success'>New flat added successfully!</div>";
           }

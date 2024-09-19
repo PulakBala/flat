@@ -41,7 +41,7 @@ include('connection.php');
 
 // Get the flat ID from the URL
 $flatId = isset($_GET['id']) ? intval($_GET['id']) : 0;
-echo $flatId;
+
 // Initialize variables
 $ownerName = 'Not Available';
 $mobileNumber = 'Not Available';
